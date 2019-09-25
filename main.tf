@@ -33,3 +33,13 @@ resource "aws_security_group" "instance" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+data "terraform_remote_state" "db" {
+  backend = "s3"
+
+  config = {
+    bucket = "berchev-terraform-book-state"
+    key    = "remote_state/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
